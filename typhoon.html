@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Typhoon</title>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="kusoduck">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="css/site.css" >
+	<link rel="stylesheet" href="css/navTop.css">
+	<link rel="stylesheet" href="css/navSide.css">
+</head>
+
+<body>
+	<nav id="topNav"></nav>
+	<nav id="sideNav"></nav>
+	<div id="main">
+		<h1>Typhoon</h1> 
+		<div id="googleMap" class="col-5 col-m-5 mapBox"></div>
+		<footer id="foot01"></footer>
+	</div>
+</body>
+
+<script src="js/script.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+	var size = $(".mapBox").width();
+	$(".mapBox").css("height",size+"px");
+	
+	//指定位置
+	var mapCenter = new google.maps.LatLng(22.8, 122.8);
+	
+	var path = [
+		{
+			"Lat":20.8,
+			"Lng":127.2,
+			"time":"2016/09/26 08:00"
+		},
+		{
+			"Lat":21.1,
+			"Lng":126.8,
+			"time":"2016/09/26 11:00"
+		},
+		{
+			"Lat":21.4,
+			"Lng":126.2,
+			"time":"2016/09/26 14:00"
+		}
+	];
+	
+	function initialize()
+	{	
+		/*
+		var mapProp = {
+		  center:mapCenter,
+		  zoom:9,
+		  mapTypeId:google.maps.MapTypeId.ROADMAP
+		  };
+		*/
+		var mapOptions = {center: mapCenter, zoom: 7};
+		var map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+		
+		for(i=0; i < path.length; i++){
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(path[i].Lat, path[i].Lng),
+			});
+			
+			var circleInner = new google.maps.Circle({
+				center: new google.maps.LatLng(path[i].Lat, path[i].Lng),
+				radius: 80*1000,
+				strokeColor: "#0000FF",
+				strokeOpacity: 0.2,
+				strokeWeight: 2,
+				fillColor: "red",
+				fillOpacity: 0.4
+			});
+			
+			var circleOuter = new google.maps.Circle({
+				center: new google.maps.LatLng(path[i].Lat, path[i].Lng),
+				radius: 220*1000,
+				strokeColor: "#0000FF",
+				strokeOpacity: 0.2,
+				strokeWeight: 2,
+				fillColor: "red",
+				fillOpacity: 0.2
+			});
+			
+			
+			marker.setMap(map);
+			circleInner.setMap(map);
+			circleOuter.setMap(map);
+			
+			var infowindow = new google.maps.InfoWindow({
+				content: path[i].time
+			});
+			infowindow.open(map,marker);
+		}
+		
+		<!--final-->
+		var markerFinal = new google.maps.Marker({
+			position: new google.maps.LatLng(23.1, 122.2),
+		});
+		
+		var circleInnerFinal = new google.maps.Circle({
+			center: new google.maps.LatLng(23.1, 122.2),
+			radius: 100*1000,
+			strokeColor: "#0000FF",
+			strokeOpacity: 0.2,
+			strokeWeight: 2,
+			fillColor: "red",
+			fillOpacity: 0.4
+		});
+		
+		var circleOuterFinal = new google.maps.Circle({
+			center: new google.maps.LatLng(23.1, 122.2),
+			radius: 250*1000,
+			strokeColor: "#0000FF",
+			strokeOpacity: 0.2,
+			strokeWeight: 2,
+			fillColor: "red",
+			fillOpacity: 0.2
+		});
+		
+		
+		markerFinal.setMap(map);
+		circleInnerFinal.setMap(map);
+		circleOuterFinal.setMap(map);
+		
+		var infowindowFinal = new google.maps.InfoWindow({
+			content: "2016/09/27 11:00"
+		});
+		infowindowFinal.open(map,markerFinal);
+		
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+	
+</script>
+</html>
+

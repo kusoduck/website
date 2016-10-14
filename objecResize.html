@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<body>
+	<div id="main">
+		<p id="demo">0</p>
+	</div>
+</body>
+<script>
+document.getElementById("main").addEventListener("resize", myFunction);
+
+function myFunction() {
+	var w = window.outerWidth;
+	document.getElementById("demo").innerHTML = w+"px";
+}
+</script>
+</html>

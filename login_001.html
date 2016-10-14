@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/Site.css">
+	<link rel="stylesheet" href="css/ModalLogin.css">
+	<style>
+		input[type=text],input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		
+		button {
+			background-color: #808080;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+		}
+		
+		.smallBtn {
+			width: auto;
+			padding: 10px 18px;
+			background-color: #808080;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main">
+		<div id="signin">
+			<form action="action_login.php">
+				<label><b>Username</b></label>
+				<input type="text" name="acc" placeholder="Enter Username">
+				<br>
+				<label><b>Password</b></label>
+				<input type="password" name="pwd" placeholder="Enter Password">
+				<br><br>
+				<button type="submit">Login</button>
+				<button class="smallBtn" type="button" onclick="signup()">Register</button>
+			</form>
+		</div>
+	</div>
+	
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<form action="action_createAcc.php">
+				<label><b>Username</b></label>
+				<input type="text" name="acc" placeholder="Enter Username">
+				<br>
+				<label><b>Password</b></label>
+				<input type="password" name="pwd1" placeholder="Enter Password">
+				<br>
+				<label><b>Repeat</b></label>
+				<input type="password" name="pwd2" placeholder="Enter Password Again">
+				<br>
+				<label><b>Name</b></label>
+				<input type="text" name="name" placeholder="Enter Your Name">
+				<br>
+				<label><b>E-Mail</b></label>
+				<input type="text" name="mail" placeholder="Enter E-Mail Address">
+				<br><br>
+				<button class="smallBtn" type="submit">Send</button>
+			</form>
+			<span class="close">x</span>
+		</div>
+	</div>
+</body>
+<script>
+	// Get the modal
+	var modal = document.getElementById('myModal');
+	
+	function signup(){
+		modal.style.display = "block";
+	}
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+	
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			img.src = "";
+			modal.style.display = "none";
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,26 @@
+#topNav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background-color: #111;
+    position: fixed;
+    top: 0;
+	width: 100%;
+	z-index: 1; /* Sit on top */
+}
+
+#topNav li {
+    float: left;
+}
+
+#topNav li a {
+    display: block;
+    color: #818181;
+    padding: 16px;
+    text-decoration: none;
+}
+
+#topNav li a:hover {
+	color: white;
+} 

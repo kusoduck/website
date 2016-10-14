@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Album</title>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="kusoduck">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="css/site.css" >
+	<link rel="stylesheet" href="css/navTop.css">
+	<link rel="stylesheet" href="css/navSide.css">
+	<link rel="stylesheet" href="css/ModalImg.css">
+	<link rel="stylesheet" href="css/button.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+
+<body>
+	<nav id="topNav"></nav>
+	<nav id="sideNav"></nav>
+	
+	<div id="main">	
+		<h1>My Album</h1>
+		
+		<div id="upload">
+			<form action="imgPreview.html">
+				<input class="button" type="submit" value="upload photo" />
+			</form>
+		</div>
+		
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/Chrysanthemum.jpg" alt="Chrysanthemum">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/Desert.jpg" alt="Desert">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/Hydrangeas.jpg" alt="Hydrangeas">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/Jellyfish.jpg" alt="Jellyfish">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/Koala.jpg" alt="Koala">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/Lighthouse.jpg" alt="Lighthouse">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/IMAG0462.jpg" alt="">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/IMAG0555.jpg" alt="">
+		</figure>
+		<figure class="col-2 col-m-3 imgBox">
+			<img class="photo" src="album/IMAG0419.jpg" alt="">
+		</figure>
+		
+		<footer id="foot01"></footer>
+	</div>
+	
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<!--<div class="modal-content">-->
+		<span class="pre fa fa-angle-left" style="font-size:48px;"></span>
+		<img id="myImg" src="" alt="myImg">
+		<span class="next fa fa-angle-right" style="font-size:48px;"></span>
+		<span class="close">x</span>
+		<!--</div>-->
+	</div>
+</body>
+
+<script src="js/script.js"></script>
+<script src="js/SetAndResizeImg.js"></script>
+<script>
+	var count = document.getElementsByClassName("photo").length;
+	var photoNumber=0;
+	
+	var photos = document.getElementsByClassName("photo");
+	
+	// Get the modal
+	var modal = document.getElementById('myModal');
+	
+	// Get the img
+	var img = document.getElementById("myImg");
+	
+	// When photos be clicked popup modal
+	/*
+	for(i=0; i<count; i++){
+		photos[i].onclick = function(event) {
+			img.src = event.target.src;
+			modal.style.display = "block";
+			for(j=0; j<count; j++){
+				if(event.target==photos[j]){
+					photoNumber = j;
+				}
+			}
+		}
+	}*/
+	
+	var window_h = $(window).height();
+	$(".photo").each(
+		function(index){
+			$(this).on('click', function(event){
+				$("#myModal").css("display","block");
+				$("#myImg").attr("src",event.target.src);
+				var top = (window_h - $("#myImg").height())/2;
+				$("#myImg").css("margin", top+"px auto");
+				//console.log($("#myImg").height());
+				//console.log(index);
+				photoNumber = index;
+			});
+		}
+	);
+	
+	// When the user clicks on <span> (>), go to next photo
+	var next = document.getElementsByClassName("next")[0];
+	next.onclick = function() {
+		if(photoNumber<count-1){
+			photoNumber = photoNumber+1;
+			img.src = photos[photoNumber].src;
+			var top = (window_h - $("#myImg").height())/2;
+			$("#myImg").css("margin", top+"px auto");
+		}
+	}
+	
+	// When the user clicks on <span> (<), go to previous photo
+	var pre = document.getElementsByClassName("pre")[0];
+	pre.onclick = function() {
+		if(photoNumber>0){
+			photoNumber = photoNumber-1;
+			img.src = photos[photoNumber].src;
+			var top = (window_h - $("#myImg").height())/2;
+			$("#myImg").css("margin", top+"px auto");
+		}
+	}
+	
+	$("#myModal").on("swipeleft",function(){
+		console.log("swipeleft");
+	});
+	
+	// Get the <span> element that closes the modal
+	var close = document.getElementsByClassName("close")[0];
+	// When the user clicks on <span> (x), close the modal
+	close.onclick = function() {
+		img.src = "";
+		modal.style.display = "none";
+	}
+	
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			img.src = "";
+			modal.style.display = "none";
+		}
+	}
+	
+	// When the user keydown left or right, change photo
+	window.onkeydown = function(event) {
+		if(event.which==39){
+			if(photoNumber<count-1){
+				photoNumber = photoNumber+1;
+				img.src = photos[photoNumber].src;
+			}
+		}
+		else if(event.which==37){
+			if(photoNumber>0){
+				photoNumber = photoNumber-1;
+				img.src = photos[photoNumber].src;
+			}
+		}
+	}
+	
+</script>
+
+</html>

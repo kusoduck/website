@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customers</title>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="kusoduck">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="css/site.css" >
+	<link rel="stylesheet" href="css/navTop.css">
+	<link rel="stylesheet" href="css/navSide.css">
+	
+	<style>
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+	</style>
+</head>
+<body>
+	<nav id="topNav"></nav>
+	<nav id="sideNav"></nav>
+
+	<div id="main">  
+		<h1>Customers</h1>
+		<div id="id01"></div>
+		<footer id="foot01"></footer>
+	</div>
+	<div id="snackbar"></div>
+	
+</body>
+
+<script src="js/script.js"></script>
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://www.w3schools.com/website/customers.php";
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        myFunction(xmlhttp.responseText);
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(response) {
+    var obj = JSON.parse(response);
+    var arr = obj.records;
+    var i;
+    var out = "<table><tr><th>Name</th><th>City</th><th>Country</th></tr>";
+
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" + 
+        arr[i].Name +
+        "</td><td>" +
+        arr[i].City +
+        "</td><td>" +
+        arr[i].Country +
+        "</td></tr>";
+    }
+    out += "</table>"
+    document.getElementById("id01").innerHTML = out;
+}
+
+
+var page = 0;
+$(window).scroll(function() { //detect page scroll
+    if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled to bottom of the page
+		page++;
+        showSnackbar(page); //load content   
+    }
+}); 
+
+function showSnackbar(page) {
+    var x = document.getElementById("snackbar")
+	x.innerHTML = "page " + page;
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			aaa(xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+
+	function aaa(response) {
+		var obj = JSON.parse(response);
+		var arr = obj.records;
+		var i;
+		var out = "<table><tr><th>Name</th><th>City</th><th>Country</th></tr>";
+
+		for(i = 0; i < arr.length; i++) {
+			out += "<tr><td>" + 
+			arr[i].Name +
+			"</td><td>" +
+			arr[i].City +
+			"</td><td>" +
+			arr[i].Country +
+			"</td></tr>";
+		}
+		out += "</table>"
+		$("#id01").append(out);
+	}																	
+}
+</script>
+</html>

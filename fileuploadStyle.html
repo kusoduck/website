@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload</title>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="kusoduck">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+
+	<style>
+		//.upl {position:absolute;opacity:0;filter:alpha(opacity=0);}
+	</style>
+</head>
+
+<body>
+	<nav id="topNav"></nav>
+	<nav id="sideNav"></nav>
+	<div id="main">
+		<h1>Upload Photo</h1>
+		<form class="form1" action="upload.php" method="post" enctype="multipart/form-data">
+			<input type='file' class="upl" name="upl[]" multiple>
+   <input type="text" name="upfile" size="20" readonly>
+   <input type="button" value="openfile" onclick="this.form.file.click();" WIDTH="200" style="WIDTH: 197px;"> 
+			<input class='button' type="submit" value="Upload Image" name="submit">
+		</form>
+		<div class="preview">
+		</div>
+		
+		<footer id="foot01"></footer>
+	</div>
+</body>
+
+
+<script>
+
+</script>
+</html>
