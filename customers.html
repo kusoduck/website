@@ -48,20 +48,22 @@
 </body>
 
 <script src="js/script.js"></script>
+<script src="js/resizeTopNavMargin.js"></script>
 <script>
 var xmlhttp = new XMLHttpRequest();
-var url = "http://www.w3schools.com/website/customers.php";
+var url = "https://www.w3schools.com/js/Customers_MYSQL.php";
+//var url = "http://localhost/json.txt";
+
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
 xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         myFunction(xmlhttp.responseText);
     }
 }
-xmlhttp.open("GET", url, true);
-xmlhttp.send();
 
 function myFunction(response) {
-    var obj = JSON.parse(response);
-    var arr = obj.records;
+    var arr = JSON.parse(response);
     var i;
     var out = "<table><tr><th>Name</th><th>City</th><th>Country</th></tr>";
 
@@ -79,7 +81,7 @@ function myFunction(response) {
 }
 
 
-var page = 0;
+var page = 1;
 $(window).scroll(function() { //detect page scroll
     if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled to bottom of the page
 		page++;
@@ -93,17 +95,16 @@ function showSnackbar(page) {
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	
-	xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			aaa(xmlhttp.responseText);
-		}
-	}
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
-
-	function aaa(response) {
-		var obj = JSON.parse(response);
-		var arr = obj.records;
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			appendOut(xmlhttp.responseText);
+		}
+	}
+	
+	function appendOut(response) {
+		var arr = JSON.parse(response);
 		var i;
 		var out = "<table><tr><th>Name</th><th>City</th><th>Country</th></tr>";
 

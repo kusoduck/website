@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="css/site.css">
+	<!--<link rel="stylesheet" href="css/hero-image.css">-->
 	<link rel="stylesheet" href="css/navTop.css">
 	<link rel="stylesheet" href="css/navSide.css">
 	
@@ -17,7 +18,7 @@
 	<div id="topNav"></div>
 	<nav id="sideNav"></nav>
 
-	<div id="main">
+	<div id="main" class="hero-image">
 		<h1>Welcome to My Website</h1> 
 		<h2>Web Site Main Ingredients:</h2>
 		
@@ -25,10 +26,31 @@
 		<p>Style Sheets (CSS)</p>
 		<p>Computer Code (JavaScript)</p>
 		<p>Live Data (Files and Databases)</p>
-		<footer id="foot01"></footer>
+		<button type="button" onclick="writeUserData()">Click Me!</button>
 	</div>
+	<footer id="foot01"></footer>
 </body>
 
 <script src="js/script.js"></script>
+<script src="js/resizeTopNavMargin.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCxjdVo6cTDCNR81C-Odj7nJbvTGZMJHTI",
+    authDomain: "scoialweb-82629.firebaseapp.com",
+    databaseURL: "https://scoialweb-82629.firebaseio.com",
+    storageBucket: "scoialweb-82629.appspot.com",
+    messagingSenderId: "280558839513"
+  };
+  firebase.initializeApp(config);
+  
+function writeUserData() {
+  firebase.database().ref('users/' + userId).set({
+    username: "sam",
+    email: "kusoduck"
+  });
+}
+</script>
 </html>
