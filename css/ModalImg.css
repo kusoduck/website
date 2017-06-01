@@ -9,7 +9,7 @@
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+	background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
@@ -39,38 +39,30 @@
 	cursor: pointer;
 }
 
+/* The Next and Previous Button */
+.next, .pre{
+	font-size:24px;
+	text-decoration: none;
+	position: absolute;
+	z-index: 3;
+	top: 50%;
+	color: #f1f1f1;
+	font-weight: bold;
+	transition: 0.3s;
+}
 /* The Next Button */
 .next {
-	position: absolute;
-	z-index: 3;
-	top: 50%;
 	right: 10%;
-	color: #f1f1f1;
-	font-weight: bold;
-	transition: 0.3s;
 }
-
-.next:hover{
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
 /* The Previous Button */
 .pre {
-	position: absolute;
-	z-index: 3;
-	top: 50%;
 	left: 10%;
-	color: #f1f1f1;
-	font-weight: bold;
-	transition: 0.3s;
 }
 
-.pre:hover{
+.next:hover ,.pre:hover{
+	cursor: pointer;
 	color: black;
 	text-decoration: none;
-	cursor: pointer;
 }
 	
 img#myImg {
